@@ -21,17 +21,49 @@ st.markdown(
         padding-top: 1.8rem;
         padding-bottom: 2rem;
     }
+
     [data-testid="stMetric"] {
         background: #F4F7FB;
         border: 1px solid #E2E8F0;
         padding: 18px 20px;
         border-radius: 12px;
     }
+
     [data-testid="stMetricLabel"] {
         color: #475569;
     }
+
     h1, h2, h3 {
         color: #152B4A;
+    }
+
+    .hero {
+        padding: 24px 30px;
+        border-radius: 16px;
+        color: white;
+        background: linear-gradient(110deg, #172554, #2563eb, #0891b2);
+        margin-bottom: 22px;
+    }
+
+    .hero .eyebrow {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #bfdbfe;
+        margin-bottom: 8px;
+    }
+
+    .hero h1 {
+        color: white !important;
+        font-size: 30px !important;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    .hero p {
+        color: #e0f2fe;
+        font-size: 15px;
+        margin: 8px 0 0;
     }
     </style>
     """,
@@ -47,8 +79,16 @@ sales_data["Sales"] = sales_data["Quantity"] * sales_data["UnitPrice"]
 header_col, status_col = st.columns([5, 1])
 
 with header_col:
-    st.title("Enterprise AI Data Analyst")
-    st.caption("Sales performance | Interactive business intelligence")
+    st.markdown(
+        """
+        <div class="hero">
+            <div class="eyebrow">SALES INTELLIGENCE</div>
+            <h1>AI-Powered Sales Analytics Dashboard</h1>
+            <p>Interactive business insights, powered by your sales data.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 with status_col:
     st.caption("AI assistant")
@@ -170,7 +210,9 @@ if question:
         if not sales_by_region.empty:
             best_region = sales_by_region.idxmax()
             best_sales = sales_by_region.max()
-            st.success(f"{best_region} has the highest sales: ₹{best_sales:,.0f}")
+            st.success(
+                f"{best_region} has the highest sales: ₹{best_sales:,.0f}"
+            )
         else:
             st.warning("No sales data matches these filters.")
 
@@ -180,7 +222,9 @@ if question:
         if not sales_by_product.empty:
             best_product = sales_by_product.idxmax()
             best_sales = sales_by_product.max()
-            st.success(f"{best_product} has the highest sales: ₹{best_sales:,.0f}")
+            st.success(
+                f"{best_product} has the highest sales: ₹{best_sales:,.0f}"
+            )
         else:
             st.warning("No sales data matches these filters.")
 
